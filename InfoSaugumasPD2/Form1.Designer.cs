@@ -49,6 +49,7 @@ namespace InfoSaugumasPD2
             this.fileNameTxt = new System.Windows.Forms.TextBox();
             this.ivTxt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.cleardecBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // encryptTxt
@@ -244,11 +245,22 @@ namespace InfoSaugumasPD2
             this.label8.TabIndex = 20;
             this.label8.Text = "Insert cryption IV (32):";
             // 
+            // cleardecBtn
+            // 
+            this.cleardecBtn.Location = new System.Drawing.Point(515, 486);
+            this.cleardecBtn.Name = "cleardecBtn";
+            this.cleardecBtn.Size = new System.Drawing.Size(125, 23);
+            this.cleardecBtn.TabIndex = 21;
+            this.cleardecBtn.Text = "Clear Decryption";
+            this.cleardecBtn.UseVisualStyleBackColor = true;
+            this.cleardecBtn.Click += new System.EventHandler(this.cleardecBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(830, 633);
+            this.Controls.Add(this.cleardecBtn);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.ivTxt);
             this.Controls.Add(this.fileNameTxt);
@@ -298,6 +310,7 @@ namespace InfoSaugumasPD2
         private System.Windows.Forms.TextBox fileNameTxt;
         private System.Windows.Forms.TextBox ivTxt;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button cleardecBtn;
     }
 }
 

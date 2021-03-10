@@ -277,5 +277,10 @@ namespace InfoSaugumasPD2
                 return decrypter.TransformFinalBlock(data, 0, data.Length);
             }
         }
+
+        private void cleardecBtn_Click(object sender, EventArgs e)
+        {
+            decryptedTxt.Text = string.Empty;
+        }
     }
 }
