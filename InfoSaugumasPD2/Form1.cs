@@ -68,11 +68,12 @@ namespace InfoSaugumasPD2
                         Console.WriteLine("Key: {0}", keyTxt.Text);
                         byte[] text = Encoding.UTF8.GetBytes(encryptTxt.Text);
                         byte[] key = Encoding.UTF8.GetBytes(keyTxt.Text);
-                        Console.WriteLine("0");
+                        
                         encryptedTxt.Text = Convert.ToBase64String(EncryptECB(text, key));
-                        Console.WriteLine("1");
+                        Console.WriteLine("ENC {0}", encryptedTxt.Text);
+                        File.WriteAllText(@"C:\Users\ASUS\Desktop\VIKO\2 Kursas\S2\Informacijos Saugumas\InfoSaugumasPD2\EncryptedECB.txt", encryptedTxt.Text);
                         byte[] enc = EncryptECB(text, key);
-                        Console.WriteLine("2");
+                        
                         byte[] dec = DecryptECB(enc, key);
 
                         //decryptedTxt.Text = getString(dec);
@@ -124,10 +125,13 @@ namespace InfoSaugumasPD2
 
                     if (modeList.SelectedItem.ToString() == "ECB")
                     {
-                        byte[] data = Convert.FromBase64String(decryptTxt.Text);
+
+                        Console.WriteLine(fileContent);
+                        byte[] data = Convert.FromBase64String(fileContent);
                         byte[] key = Encoding.UTF8.GetBytes(keyTxt.Text);
 
                         byte[] dec = DecryptECB(data, key);
+                        Console.WriteLine("DEC {0}", Encoding.UTF8.GetString(dec));
                         decryptedTxt.Text = Encoding.UTF8.GetString(dec);
                         File.WriteAllText(@"C:\Users\ASUS\Desktop\VIKO\2 Kursas\S2\Informacijos Saugumas\InfoSaugumasPD2\DecryptedECB.txt", decryptedTxt.Text);
                     }
@@ -253,10 +257,10 @@ namespace InfoSaugumasPD2
         {
             using (AesCryptoServiceProvider csp = new AesCryptoServiceProvider())
             {
-                csp.KeySize = 256;
-                csp.BlockSize = 128;
+                //csp.KeySize = 256;
+                //csp.BlockSize = 128;
                 csp.Key = key;
-                csp.Padding = PaddingMode.PKCS7;
+                csp.Padding = PaddingMode.Zeros;
                 csp.Mode = CipherMode.ECB;
                 ICryptoTransform encrypter = csp.CreateEncryptor();
                 return encrypter.TransformFinalBlock(data, 0, data.Length);
@@ -267,12 +271,12 @@ namespace InfoSaugumasPD2
         {
             using (AesCryptoServiceProvider csp = new AesCryptoServiceProvider())
             {
-                csp.KeySize = 256;
-                csp.BlockSize = 128;
+                //csp.KeySize = 256;
+                //csp.BlockSize = 128;
                 csp.Key = key;
+                csp.Padding = PaddingMode.Zeros;
                 csp.Mode = CipherMode.ECB;
-                csp.Padding = PaddingMode.PKCS7;
-
+                //Console.WriteLine("DEC DATA {0}", Convert.ToBase64String(data));
                 ICryptoTransform decrypter = csp.CreateDecryptor();
                 return decrypter.TransformFinalBlock(data, 0, data.Length);
             }
